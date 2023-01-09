@@ -4,10 +4,15 @@
 var date = dayjs();
  $('#currentDay').text(date.format('[Today is] MMMM DD, YYYY'));
 
- 
-
+var saveBtn = $('.savebtn');
+var description = $('.description')
 
 $(function () {
+
+  saveBtn.on('click', function(event){
+    event.preventDefault();
+
+  })
     // TODO: Add a listener for click events on the save button. This code should
     // use the id in the containing time-block as a key to save the user input in
     // local storage. HINT: What does `this` reference in the click listener
@@ -28,3 +33,13 @@ $(function () {
     // TODO: Add code to display the current date in the header of the page.
   });
   
+
+// for loop
+  //i = 0; i < day time; i++
+
+// when the time has moved by one
+// change the hour to past
+// when the hour is now 
+//change the hour to present
+// when the hour has not yet arrived
+// keep the hour as furture
