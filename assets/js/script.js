@@ -6,20 +6,49 @@ var date = dayjs();
 
 var saveBtn = $('.savebtn');
 var description = $('.description')
+var timeBlock = $('.time-block')
 
 $(function () {
+  
+  function getStringFromStor() {
+    var textArea = localStorage.setItem("text")
+    if (textArea) {
+      textArea = JSON.stringify(textArea);
+    } else {
+      textArea = [""];
+    }
+    return textArea;
+  }
+  saveBtn.on('click', function(textArea){
+    localStorage.setItem('text', JSON.stringify(textArea))
+  });
 
-  saveBtn.on('click', function(event){
-    event.preventDefault();
+  function displayDescription(){
+    var hourNine = $('#hour-9')
+    var hourTen = $('#hour-10')
+    var hourEleven = $('#hour-11')
+    var hourTwelve = $('#hour-12')
+    var hourOne = $('#hour-1')
+    var hourTwo = $('#hour-2')
+    var hourThree = $('#hour-3')
+    var hourFour = $('#hour-4')
+    var hourFive = $('#hour-5')
+    
+    var textArea = getStringFromStor();
+    for( var i=0; i < dayjs('h'); i++){
 
-  })
+    }
+
+  }
+
+  displayDescription();
     // TODO: Add a listener for click events on the save button. This code should
     // use the id in the containing time-block as a key to save the user input in
     // local storage. HINT: What does `this` reference in the click listener
     // function? How can DOM traversal be used to get the "hour-x" id of the
     // time-block containing the button that was clicked? How might the id be
     // useful when saving the description in local storage?
-    //
+
     // TODO: Add code to apply the past, present, or future class to each time
     // block by comparing the id to the current hour. HINTS: How can the id
     // attribute of each time-block be used to conditionally add or remove the
