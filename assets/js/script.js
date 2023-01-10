@@ -8,10 +8,10 @@ var saveBtn = $('.savebtn');
 var description = $('.description')
 var timeBlock = $('.time-block')
 
-$(function () {
+
   
   function getStringFromStor() {
-    var textArea; 
+    var textArea = localStorage.setItem('textArea') 
     if (textArea) {
       textArea = JSON.stringify(textArea);
     } else {
@@ -20,6 +20,7 @@ $(function () {
     return textArea;
   }
   saveBtn.on('click', function(textArea){
+    getStringFromStor()
     localStorage.setItem('text', JSON.stringify(textArea))
   });
 
@@ -28,32 +29,28 @@ $(function () {
     let hourTen = $('#hour-10');
     let hourEleven = $('#hour-11');
     let hourTwelve = $('#hour-12');
-    let hourOne = $('#hour-1');
-    let hourTwo = $('#hour-2');
-    let hourThree = $('#hour-3');
-    let hourFour = $('#hour-4');
-    let hourFive = $('#hour-5');
-    console.log(hourNine)
-    var workHours = [hourNine, hourTen, hourEleven, hourTwelve, hourOne, hourTwo, hourThree, hourFour, hourFive]
-      
-    var workHours = getStringFromStor();
-    for( var i=0; i < workHours.length; i++){
-      let workHours = workHours[i]
-      var hourCount = dayjs(workHours.date)
-      var nowHour = dayjs('h')
-      console.log(workHours[1])
-    if(hourCount.isBefore(nowHour)){
-            
+    let hourThirteen = $('#hour-1');
+    let hourFourteen = $('#hour-2');
+    let hourFifteen  = $('#hour-3');
+    let hourSixteen = $('#hour-4');
+    let hourSeventeen = $('#hour-5');
+    var workHours = [hourNine, hourTen, hourEleven, hourTwelve, hourThirteen, hourFourteen, hourFifteen, hourSixteen, hourSeventeen]
 
-            workHours[i].addClass('future')
-          } else if(hourCount.isSame(nowHour)){
-            workHours[i].addClass('present')
-          } else {
-            workHours[i].addClass('past')
-          }
+    for( var i=0; i < workHours.length; i++){
+      let hour = workHours[i]
+      var hourCount = dayjs(hour.date)
+      var nowHour = dayjs().format('LT')
+      
+      if(hourCount === nowHour){
+        console.log(workHours[i])
+          workHours[i].addClass('present')
+        } else if(hourCount == nowHour){
+          workHours[i].addClass('future')
+        } else {
+          workHours[i].addClass('past')
+        }
   }}
 
-  displayDescription();
     // TODO: Add a listener for click events on the save button. This code should
     // use the id in the containing time-block as a key to save the user input in
     // local storage. HINT: What does `this` reference in the click listener
@@ -72,8 +69,8 @@ $(function () {
     // attribute of each time-block be used to do this?
     //
     // TODO: Add code to display the current date in the header of the page.
-  });
-  
+
+  displayDescription()
 
 // for loop
   //i = 0; i < day time; i++
