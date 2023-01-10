@@ -11,7 +11,7 @@ var timeBlock = $('.time-block')
 $(function () {
   
   function getStringFromStor() {
-    var textArea = localStorage.setItem("text")
+    var textArea; 
     if (textArea) {
       textArea = JSON.stringify(textArea);
     } else {
@@ -24,22 +24,34 @@ $(function () {
   });
 
   function displayDescription(){
-    var hourNine = $('#hour-9')
-    var hourTen = $('#hour-10')
-    var hourEleven = $('#hour-11')
-    var hourTwelve = $('#hour-12')
-    var hourOne = $('#hour-1')
-    var hourTwo = $('#hour-2')
-    var hourThree = $('#hour-3')
-    var hourFour = $('#hour-4')
-    var hourFive = $('#hour-5')
-    
-    var textArea = getStringFromStor();
-    for( var i=0; i < dayjs('h'); i++){
+    let hourNine = $('#hour-9');
+    let hourTen = $('#hour-10');
+    let hourEleven = $('#hour-11');
+    let hourTwelve = $('#hour-12');
+    let hourOne = $('#hour-1');
+    let hourTwo = $('#hour-2');
+    let hourThree = $('#hour-3');
+    let hourFour = $('#hour-4');
+    let hourFive = $('#hour-5');
+    console.log(hourNine)
+    var workHours = [hourNine, hourTen, hourEleven, hourTwelve, hourOne, hourTwo, hourThree, hourFour, hourFive]
+      
+    var workHours = getStringFromStor();
+    for( var i=0; i < workHours.length; i++){
+      let workHours = workHours[i]
+      var hourCount = dayjs(workHours.date)
+      var nowHour = dayjs('h')
+      console.log(workHours[1])
+    if(hourCount.isBefore(nowHour)){
+            
 
-    }
-
-  }
+            workHours[i].addClass('future')
+          } else if(hourCount.isSame(nowHour)){
+            workHours[i].addClass('present')
+          } else {
+            workHours[i].addClass('past')
+          }
+  }}
 
   displayDescription();
     // TODO: Add a listener for click events on the save button. This code should
